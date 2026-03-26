@@ -19,16 +19,22 @@ A blazing fast, next-generation web application built with React and Vite that i
 
 1. Ensure you have Node.js installed.
 2. Clone the repository and navigate into the `Official-Slang` directory.
-3. Install the dependencies:
+3. Create a `.env` file in the root directory and add your Gemini API Key:
+   ```env
+   VITE_GEMINI_API_KEY=your_api_key_here
+   ```
+4. Install the dependencies:
    ```bash
    npm install
    ```
-4. Start the local Vite server:
+5. Start the local Vite server:
    ```bash
    npm run dev
    ```
-5. Open your browser and navigate to `http://localhost:5173/`. 
-*(Note: An active Gemini API key is currently integrated directly into the `translator.js` engine).*
+6. Open your browser and navigate to `http://localhost:5173/`. 
+
+> [!WARNING]
+> Because this is a purely frontend static application (HTML/JS/CSS) without a backend, providing the API key to Vite means the key will be exposed in the compiled `gh-pages` Javascript bundle. While `.env` keeps it out of your repository source code, anyone inspecting the live website's network requests can still see the key. For true security, this API call must be routed through a backend server.
 
 ## Deploying
 This project is configured to auto-deploy its optimized build directory (`/dist`) to the `gh-pages` branch.

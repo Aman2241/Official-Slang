@@ -1,7 +1,8 @@
 export async function translateToProfessional(text) {
   if (!text || text.trim() === "") return "";
   
-  const apiKey = "AIzaSyD82il3fsb6_i5Dh8qkFH7JacW3teZ-XP8";
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) return "Error: Missing VITE_GEMINI_API_KEY in environment variables.";
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const prompt = `You are a highly skilled professional corporate translator. The following text contains slang, casual Hinglish, profanity, or informal phrasing.
