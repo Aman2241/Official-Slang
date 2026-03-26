@@ -1,16 +1,34 @@
-# React + Vite
+# Official Slang Translator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[🌐 Live Project Demo](https://aman2241.github.io/Official-Slang/)
 
-Currently, two official plugins are available:
+A blazing fast, real-time web application built with React and Vite that intercepts casual, slang, or vulgar language and transforms it into highly refined, corporate-friendly professional discourse. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
+- **Real-Time Engine**: Instantly sanitizes harsh words into professional equivalents using a rapid dictionary lookup.
+- **Premium Glassmorphic UI**: Stunning dark mode aesthetic with frosted glass panels, floating gradient orbs, and sleek micro-animations.
+- **Visual Highlighting**: Substituted keywords instantly light up with a subtle blue tracking pulse so you know exactly what was changed.
 
-## React Compiler
+## Technology Stack
+- **React (Vite)**: For lightning fast performance and state management.
+- **CSS**: Pure vanilla CSS logic handling all typography (`Inter` font), animations, gradients, and layout.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Running Locally
 
-## Expanding the ESLint configuration
+1. Ensure you have Node.js installed.
+2. Clone the repository and navigate into the `Official-Slang` directory:
+   ```bash
+   npm install
+   ```
+3. Start the local Vite server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to `http://localhost:5173/`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Deploying
+This project is configured to auto-deploy its optimized build directory (`/dist`) to the `gh-pages` branch.
+To ship new updates to the live site, simply run:
+```bash
+npm run deploy
+```
