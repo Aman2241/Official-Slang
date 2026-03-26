@@ -27,7 +27,23 @@ export const slangDictionary = {
   "garbage": "unusable material",
   "trash": "discarded concepts",
   "moron": "misguided person",
-  "jerk": "uncooperative peer"
+  "jerk": "uncooperative peer",
+  
+  // Hinglish / Casual Desi Phrases
+  "ho gya bhai bhej rhe": "The task is completed, I am forwarding it now.",
+  "ho gaya bhai bhej raha hu": "The task is completed, I am sending it now.",
+  "ho gya": "it is completed",
+  "ho gaya": "it is completed",
+  "bhej rhe": "sending it over",
+  "bhai": "team",
+  "yaar": "colleagues",
+  "jaldi kar": "please expedite this",
+  "jaldi karo": "please expedite this",
+  "samajh nahi aa raha": "I require further clarification",
+  "dekh lenge": "we will review it shortly",
+  "pagal hai kya": "are you completely sure about this approach?",
+  "kya bakwas hai": "this information appears incorrect",
+  "kaam nahi kar raha": "it is currently non-functional"
 };
 
 /**
