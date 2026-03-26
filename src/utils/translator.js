@@ -1,84 +1,31 @@
-export const slangDictionary = {
-  "bullshit": "incorrect information",
-  "bs": "inaccurate information",
-  "fuck": "mess up",
-  "fucking": "extremely",
-  "fucked up": "compromised",
-  "shit": "suboptimal output",
-  "shitty": "substandard",
-  "saber-rattling": "assertiveness",
-  "wtf": "what on earth",
-  "asshole": "difficult person",
-  "bitch": "unpleasant individual",
-  "bitching": "complaining",
-  "crappy": "poor quality",
-  "crap": "subpar work",
-  "idiot": "uninformed individual",
-  "dumb": "ill-advised",
-  "stupid": "unwise",
-  "pissed": "dissatisfied",
-  "pissed off": "highly dissatisfied",
-  "shut up": "please allow me to speak",
-  "damn": "darn",
-  "hell": "heck",
-  "lmao": "[amused]",
-  "af": "highly",
-  "sucks": "is highly suboptimal",
-  "garbage": "unusable material",
-  "trash": "discarded concepts",
-  "moron": "misguided person",
-  "jerk": "uncooperative peer",
+export async function translateToProfessional(text) {
+  if (!text || text.trim() === "") return "";
   
-  // Hinglish / Casual Desi Phrases
-  "ho gya bhai bhej rhe": "The task is completed, I am forwarding it now.",
-  "ho gaya bhai bhej raha hu": "The task is completed, I am sending it now.",
-  "ho gya": "it is completed",
-  "ho gaya": "it is completed",
-  "bhej rhe": "sending it over",
-  "bhai": "team",
-  "yaar": "colleagues",
-  "jaldi kar": "please expedite this",
-  "jaldi karo": "please expedite this",
-  "samajh nahi aa raha": "I require further clarification",
-  "dekh lenge": "we will review it shortly",
-  "pagal hai kya": "are you completely sure about this approach?",
-  "kya bakwas hai": "this information appears incorrect",
-  "kaam nahi kar raha": "it is currently non-functional"
-};
+  const apiKey = "AIzaSyD82il3fsb6_i5Dh8qkFH7JacW3teZ-XP8";
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
-/**
- * Translates a given text by replacing slang/vulgar words with professional equivalents.
- * Maintains basic case preservation (Title case, UPPERCASE, lowercase).
- */
-export function translateToProfessional(text) {
-  if (!text) return "";
-  let translatedText = text;
+  const prompt = `You are a highly skilled professional corporate translator. The following text contains slang, casual Hinglish, profanity, or informal phrasing.
+Rewrite it strictly into highly refined, corporate-friendly professional English. Do not be overly verbose.
+Return ONLY the translated text without any quotes, explanations, or Markdown formatting. 
+Text: "${text}"`;
 
-  // Sort keys by length descending to match multi-word phrases first
-  const sortedKeys = Object.keys(slangDictionary).sort((a, b) => b.length - a.length);
-
-  sortedKeys.forEach((key) => {
-    // Create a regular expression for word boundary matching
-    // escaping regex special characters just in case
-    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`\\b${escapedKey}\\b`, "gi");
-
-    translatedText = translatedText.replace(regex, (match) => {
-      const replacement = slangDictionary[key];
-      
-      // Preserve uppercase
-      if (match === match.toUpperCase() && match.length > 1) {
-        return replacement.toUpperCase();
-      }
-      
-      // Preserve Titlecase
-      if (match[0] === match[0].toUpperCase()) {
-        return replacement.charAt(0).toUpperCase() + replacement.slice(1);
-      }
-      
-      return replacement;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.1 }
+      })
     });
-  });
-
-  return translatedText;
+    
+    const data = await response.json();
+    if (data.candidates && data.candidates.length > 0) {
+      return data.candidates[0].content.parts[0].text.trim();
+    }
+  } catch (error) {
+    console.error("Translation API error:", error);
+    return "Error: Unable to process the translation at this time. Please check API Key or connection.";
+  }
+  return text; // Fallback to original text if API fails parsing silently
 }
